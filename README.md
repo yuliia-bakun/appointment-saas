@@ -103,6 +103,27 @@ For a full teardown followed by a full rebuild:
 make re
 ```
 
+To check if everything is running correctly:
+
+```bash
+docker images # Should show 3 images corresponding to our services
+docker ps # Should show 3 containers currently running
+```
+
+On the browser:
+
+```text
+http://localhost:3001
+```
+
+This should show "Hello World!" which means that the backend is running correctly.
+
+```text
+http://localhost:3000
+```
+
+This should show the default page created by Vite which means that the frontend is running correctly.
+
 ### The database container
 
 To enter the container, you can run the following command using `psql`:
