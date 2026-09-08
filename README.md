@@ -1,1 +1,124 @@
 # appointment-saas
+
+## Instructions
+
+### 1. Prerequisites
+
+Make sure the following are installed on your host machine:
+
+```bash
+docker --version
+docker compose version
+node -v
+npm -v
+```
+
+If not yet installed, you can run these commands:
+
+MacOS:
+```bash
+brew install --cask docker # also includes docker compose
+brew install node # also includes npm
+```
+
+Linux (Fedora):
+```bash
+# Remove old versions if present
+sudo dnf remove docker docker-client docker-client-latest docker-common \
+  docker-latest docker-latest-logrotate docker-logrotate docker-engine
+
+# Add Docker official repository
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+# Install Docker Engine + Compose plugin
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Start Docker
+sudo systemctl enable --now docker
+
+# Add user to docker group (create group if not present)
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker   # or log out and back in
+```
+
+Make sure as well you have your own `.env` file to store all the environment variables needed for this program. Below are the relevant variables:
+
+```bash
+# Database
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+# Backend
+DATABASE_HOST=
+DATABSE_PORT=5432
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABSE_NAME=
+```
+
+Feel free to choose the values as for now, everyone will have their own local environment variables. The default port for the database is 5432 so you can keep that the same, otherwise you have to update the docker compose file.
+
+### 2. Starting the Project
+
+From the project root, run:
+
+```bash
+make
+```
+
+This builds and starts the Docker containers using the project's Docker Compose configuration.
+
+To only start the containers:
+
+```bash
+make up
+```
+
+## 3. Stopping the Project
+
+To stop and remove the containers:
+
+```bash
+make down
+```
+
+To stop containers and prune unused Docker images/system data:
+
+```bash
+make clean
+```
+
+To stop and remove the containers, but also remove the named volumes
+
+```bash
+make fclean
+```
+
+For a full teardown followed by a full rebuild:
+
+```bash
+make re
+```
+
+### The database container
+
+To enter the container, you can run the following command using `psql`:
+
+```bash
+docker compose -f srcs/docker-compose.yml exec postgres psql -U <username> -d <database_name>
+```
+
+When inside, you can run the following example commands:
+
+```bash
+\l # List all databases
+\du # List all roles/users
+\dn # List schemas
+\h # Show help for SQL commands
+\q # Quit psql and return to your normal terminal
+```
+
+
