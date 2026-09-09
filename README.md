@@ -18,12 +18,14 @@ npm -v
 If not yet installed, you can run these commands:
 
 MacOS:
+
 ```bash
 brew install --cask docker # also includes docker compose
 brew install node # also includes npm
 ```
 
 Linux (Fedora):
+
 ```bash
 # Remove old versions if present
 sudo dnf remove docker docker-client docker-client-latest docker-common \
@@ -131,5 +133,3 @@ When inside, you can run the following example commands:
 \h # Show help for SQL commands
 \q # Quit psql and return to your normal terminal
 ```
-
-
