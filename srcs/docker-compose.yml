@@ -1,0 +1,57 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: backend
+    image: nestjs
+    container_name: nestjs
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_URL: postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: frontend
+    image: react
+    container_name: react
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  
+
