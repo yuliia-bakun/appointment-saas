@@ -31,10 +31,10 @@ services:
       - "3001:3000"
     environment:
       - DATABASE_HOST=${DATABASE_HOST}
-      - DATABSE_PORT=${DATABSE_PORT}
+      - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_USER=${DATABASE_USER}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABSE_NAME=${DATABSE_NAME}
+      - DATABASE_NAME=${DATABASE_NAME}
     depends_on:
       postgres:
         condition: service_healthy
