@@ -4,6 +4,8 @@
 
 ### 1. Prerequisites
 
+#### Software
+
 Make sure the following are installed on your host machine:
 
 ```bash
@@ -43,21 +45,9 @@ sudo usermod -aG docker $USER
 newgrp docker   # or log out and back in
 ```
 
-Make sure as well you have your own `.env` file to store all the environment variables needed for this program. Below are the relevant variables:
+#### Environment variables
 
-```bash
-# Database
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
-
-# Backend
-DATABASE_HOST=
-DATABASE_PORT=5432
-DATABASE_USER=
-DATABASE_PASSWORD=
-DATABASE_NAME=
-```
+Make sure as well you have your own `.env` file to store all the environment variables needed for this program. You can find the variables needed for this project in the root of this repository under `.env.example`
 
 Feel free to choose the values as for now, everyone will have their own local environment variables. The default port for the database is 5432 so you can keep that the same, otherwise you have to update the docker compose file.
 
@@ -126,7 +116,7 @@ This should show the default page created by Vite which means that the frontend 
 
 ### The database container
 
-To enter the container, you can run the following command using `psql`:
+To enter the container, you can run the following command using `psql` and change the username and database_name to the appropriate values set by the environment variables:
 
 ```bash
 docker compose -f srcs/docker-compose.yml exec postgres psql -U <username> -d <database_name>
