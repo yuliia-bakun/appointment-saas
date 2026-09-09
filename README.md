@@ -53,10 +53,10 @@ POSTGRES_DB=
 
 # Backend
 DATABASE_HOST=
-DATABSE_PORT=5432
+DATABASE_PORT=5432
 DATABASE_USER=
 DATABASE_PASSWORD=
-DATABSE_NAME=
+DATABASE_NAME=
 ```
 
 Feel free to choose the values as for now, everyone will have their own local environment variables. The default port for the database is 5432 so you can keep that the same, otherwise you have to update the docker compose file.
