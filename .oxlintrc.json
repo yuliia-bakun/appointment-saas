@@ -26,7 +26,7 @@
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-non-null-assertion": "warn"
   },
-  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/generated/**"],
   "overrides": [
     {
       "files": ["srcs/backend/**"],
