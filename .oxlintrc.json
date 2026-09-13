@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "oxc", "unicorn", "promise"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-throw-literal": "error",
+    "prefer-promise-reject-errors": "error",
+
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-console": "warn",
+    "no-shadow": "warn",
+    "no-param-reassign": "warn",
+    "no-nested-ternary": "warn",
+    "prefer-template": "warn",
+    "require-await": "warn",
+    "default-case": "warn",
+
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-non-null-assertion": "warn"
+  },
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/generated/**"],
+  "overrides": [
+    {
+      "files": ["srcs/backend/**"],
+      "env": { "node": true },
+      "rules": {
+        "@typescript-eslint/no-extraneous-class": ["warn", { "allowWithDecorator": true }]
+      }
+    },
+    {
+      "files": ["srcs/frontend/**"],
+      "plugins": ["react", "jsx-a11y"],
+      "env": { "browser": true },
+      "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/only-export-components": ["warn", { "allowConstantExport": true }],
+        "react/no-array-index-key": "warn",
+        "@typescript-eslint/consistent-type-imports": "warn"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.e2e-spec.ts"],
+      "plugins": ["vitest"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    }
+  ]
+}

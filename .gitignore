@@ -1,2 +1,28 @@
-node_modules/
+# Env files
 .env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Build output and node modules
+node_modules
+dist/
+dist-ssr/
+*.tsbuildinfo
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Prisma ORM
+**/src/generated/
